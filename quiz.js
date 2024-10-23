@@ -31,10 +31,6 @@ const loadQuestions = async (key) => {
     const category = categories[key];
     const quizDiv = document.getElementById('quiz');
 
-    if (isFetchingCategory[category]) {
-        return; 
-    }
-
     isFetchingCategory[category] = true;
     quizDiv.innerHTML = "Loading questions...";
 
@@ -46,7 +42,7 @@ const loadQuestions = async (key) => {
             localStorage.setItem("questions", JSON.stringify(questions));
             localStorage.setItem("category", key);
 
-            window.location.href = "quiz.html";
+            window.location.href = "Questions.html";
         } else {
             quizDiv.innerHTML = "No questions available.";
         }
@@ -59,16 +55,23 @@ const loadQuestions = async (key) => {
 };
 
 
+const questionsCont = document.getElementById("questions-Cont");
+const categoryName=document.getElementById("categoryName");
+
+
 function displayQuestions() {
     const questions = JSON.parse(localStorage.getItem("questions"));
     const category = localStorage.getItem("category");
+
+    categoryName.innerHTML=`Questions for ${category}`;
+
     
-    const questionsCont = document.getElementById("questions-Cont");
 
     if (questions && questions.length > 0) {
+        
         const questionsHtml = questions.map(ques => {
             return `
-              <h3>${category} - ${decodeHtml(ques.question.text)}</h3>
+              <h3>${decodeHtml(ques.question.text)}</h3>
               <ul>
                 ${[...ques.incorrectAnswers, ques.correctAnswer]
                   .sort(() => Math.random() - 0.5)
@@ -85,8 +88,37 @@ function displayQuestions() {
 }
 
 
-if (window.location.pathname.includes("quiz.html")) {
+if (window.location.pathname.includes("Questions.html")) {
     displayQuestions();
 }
 
 
+// timer
+const resultbtn=document.getElementById("resultbtn");
+    let totalTime = 30; 
+    const timerElement = document.getElementById('timer');
+
+    const timer = setInterval(() => {
+      totalTime--;
+
+      
+      timerElement.textContent =  `Time left: ${totalTime}s`;
+
+      if (totalTime <= 0) {
+        clearInterval(timer);
+  
+        questionsCont.style.display="none";
+        categoryName.innerHTML="fineshed your quiz";
+        resultbtn.style.display="inline-block";
+    }
+    }, 1000); 
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+  
+
+const showResult=()=>{
+    window.location.href = "Result.html"; 
+    const result=document.getElementById("result");
+}
