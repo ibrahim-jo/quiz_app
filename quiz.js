@@ -72,12 +72,18 @@ function displayQuestions() {
         const questionsHtml = questions.map(ques => {
             return `
               <h3>${decodeHtml(ques.question.text)}</h3>
-              <ul>
+              <div>
                 ${[...ques.incorrectAnswers, ques.correctAnswer]
                   .sort(() => Math.random() - 0.5)
-                  .map(option => `<li>${decodeHtml(option)}</li>`)
+                  .map(option => `
+             <div>
+              <button onclick="checkAnswer('${decodeHtml(option)}', '${decodeHtml(ques.correctAnswer)}')">
+                ${decodeHtml(option)}
+              </button>
+             </div>
+           `)
                   .join("")}
-              </ul>
+              </div>
             `;
         }).join("");
 
@@ -102,7 +108,7 @@ const resultbtn=document.getElementById("resultbtn");
       totalTime--;
 
       
-      timerElement.textContent =  `Time left: ${totalTime}s`;
+      timerElement.textContent =  `${totalTime}s`;
 
       if (totalTime <= 0) {
         clearInterval(timer);
@@ -121,4 +127,9 @@ const resultbtn=document.getElementById("resultbtn");
 const showResult=()=>{
     window.location.href = "Result.html"; 
     const result=document.getElementById("result");
+}
+
+
+const backtohome=()=>{
+    window.location.href = "index.html"; 
 }
