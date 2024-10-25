@@ -71,7 +71,7 @@ function displayQuestions() {
   const category = localStorage.getItem("category");
 
 
-  categoryName.innerHTML = `${category}`;
+  categoryName.innerHTML = `${category} Quiz`;
   numofQuestions.innerHTML=`${index+1} /10`;
 
   if (questions && questions.length > 0  && index < questions.length){
@@ -96,9 +96,7 @@ function displayQuestions() {
            `
                   )
                   .join("")}
-                  ${index < 9 ? `<button id="nextbtn" onclick="nextQuestion()">Next</button>`: `<button id="nextbtn" onclick="SubmitQuestion()">Submit</button>`}
-                 
-
+                  ${index < 9 ? `<button id="nextbtn" onclick="nextQuestion()">Next</button>`: `<button id="nextbtn" onclick="endQuiz()">Submit</button>`}
             `;
     
    
@@ -123,25 +121,14 @@ const nextQuestion=()=>{
 
 
 
-let finshed = false;
 
 function endQuiz() {
-  questionsCont.style.display = "none"; 
-  if (nextbtn) nextbtn.style.display = "none"; 
-  categoryName.innerHTML = "Finished your quiz"; 
-  resultbtn.style.display = "inline-block"; 
-  numofQuestions.style.display="none";
-    clearInterval(timer); 
-  timerElement.style.display = "none"; 
+     window.location.href = "Result.html";
 }
 
 
-const SubmitQuestion = () => {
-  finshed = true; 
-  endQuiz(); 
-};
 
-let totalTime = 1800; 
+let totalTime = 900; 
 const timer = setInterval(() => {
   totalTime--;
 
@@ -150,7 +137,7 @@ const timer = setInterval(() => {
 
   timerElement.textContent = `${minutes}m ${seconds < 10 ? '0' : ''}${seconds}s`;
 
-  if (totalTime <= 0 || finshed === true) {
+  if (totalTime <= 0 ) {
     endQuiz();
   }
 }, 1000);
@@ -160,10 +147,6 @@ function stopTimer() {
 }
 
 
-const showResult = () => {
-  window.location.href = "Result.html";
-  const result = document.getElementById("result");
-};
 
 const backtohome = () => {
   window.location.href = "index.html";

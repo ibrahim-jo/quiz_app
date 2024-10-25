@@ -11,6 +11,9 @@ body {
     background-position: center;
 }
 
+
+
+
 .quiz-container {
     background-color: #ffffff;
     padding: 20px;
@@ -119,3 +122,6 @@ button.hidden {
 button:hover {
     background-color: #0056b3;
 }
+
+
+
