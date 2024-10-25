@@ -37,7 +37,7 @@ const loadQuestions = async (key) => {
   quizDiv.innerHTML = "Loading questions...";
 
   try {
-    const questions = await fetchQuestions(category, 15);
+    const questions = await fetchQuestions(category, 10);
     quizDiv.innerHTML = "";
 
     if (questions && questions.length > 0) {
@@ -58,38 +58,50 @@ const loadQuestions = async (key) => {
 
 const questionsCont = document.getElementById("questions-Cont");
 const categoryName = document.getElementById("categoryName");
+const nextbtn=document.getElementById("nextbtn");
+const numofQuestions=document.getElementById("numofQuestions");
+const resultbtn = document.getElementById("resultbtn");
+const timerElement = document.getElementById("timer");
+
+let index=0;
+
 
 function displayQuestions() {
   const questions = JSON.parse(localStorage.getItem("questions"));
   const category = localStorage.getItem("category");
 
-  categoryName.innerHTML = `Questions for ${category}`;
 
-  if (questions && questions.length > 0) {
-    const questionsHtml = questions
-      .map((ques) => {
-        return `
-              <h3>${decodeHtml(ques.question.text)}</h3>
-              
-                ${[...ques.incorrectAnswers, ques.correctAnswer]
-                  .sort(() => Math.random() - 0.5)
-                  .map(
-                    (option) => `
-             <div>
-              <button onclick="checkAnswer('${decodeHtml(
-                option
-              )}', '${decodeHtml(ques.correctAnswer)}')">
+  categoryName.innerHTML = `${category}`;
+  numofQuestions.innerHTML=`${index+1} /10`;
+
+  if (questions && questions.length > 0  && index < questions.length){
+    
+    const questionsHtml = 
+    
+      `
+        <h3>${index+ 1}. ${decodeHtml(questions[index].question.text)}</h3>
+        
+        ${[...questions[index].incorrectAnswers, questions[index].correctAnswer]
+          .sort(() => Math.random() - 0.5)
+          .map(
+            (option) => `
+            <div>
+              <label>
+                <input type="radio" name="question-${questions[index].id}" value="${decodeHtml(option)}" 
+                  onclick="checkAnswer('${decodeHtml(option)}', '${decodeHtml(questions[index].correctAnswer)}'); disableOtherOptions('question-${questions[index].id}')">
                 ${decodeHtml(option)}
-              </button>
-             </div>
+              </label>
+            </div>
+            
            `
                   )
                   .join("")}
-             
-            `;
-      })
-      .join("");
+                  ${index < 9 ? `<button id="nextbtn" onclick="nextQuestion()">Next</button>`: `<button id="nextbtn" onclick="SubmitQuestion()">Submit</button>`}
+                 
 
+            `;
+    
+   
     questionsCont.innerHTML = questionsHtml;
   } else {
     questionsCont.innerHTML = "No questions available.";
@@ -100,28 +112,58 @@ if (window.location.pathname.includes("Questions.html")) {
   displayQuestions();
 }
 
-// timer
-const resultbtn = document.getElementById("resultbtn");
-let totalTime = 30;
-const timerElement = document.getElementById("timer");
 
+
+const nextQuestion=()=>{
+  index++;
+  displayQuestions();
+
+}
+
+
+
+
+let finshed = false;
+
+function endQuiz() {
+  questionsCont.style.display = "none"; 
+  if (nextbtn) nextbtn.style.display = "none"; 
+  categoryName.innerHTML = "Finished your quiz"; 
+  resultbtn.style.display = "inline-block"; 
+  numofQuestions.style.display="none";
+    clearInterval(timer); 
+  timerElement.style.display = "none"; 
+}
+
+
+const SubmitQuestion = () => {
+  finshed = true; 
+  endQuiz(); 
+};
+
+
+
+
+// timer
+
+let totalTime = 1800; 
 const timer = setInterval(() => {
   totalTime--;
 
-  timerElement.textContent = `${totalTime}s`;
+  const minutes = Math.floor(totalTime / 60); 
+  const seconds = totalTime % 60;
 
-  if (totalTime <= 0) {
-    clearInterval(timer);
+  timerElement.textContent = `${minutes}m ${seconds < 10 ? '0' : ''}${seconds}s`;
 
-    questionsCont.style.display = "none";
-    categoryName.innerHTML = "fineshed your quiz";
-    resultbtn.style.display = "inline-block";
+  if (totalTime <= 0 || finshed === true) {
+    endQuiz();
   }
 }, 1000);
 
 function stopTimer() {
   clearInterval(timer);
 }
+
 
 const showResult = () => {
   window.location.href = "Result.html";
