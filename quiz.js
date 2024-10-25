@@ -29,10 +29,10 @@ const isFetchingCategory = {};
 
 const loadQuestions = async (key) => {
     const category = categories[key];
-    const quizDiv = document.getElementById('quiz');
+   const quizDiv = document.getElementById('quiz');
 
     if (isFetchingCategory[category]) {
-        return; 
+      return; 
     }
 
     isFetchingCategory[category] = true;
@@ -40,13 +40,14 @@ const loadQuestions = async (key) => {
 
     try {
         const questions = await fetchQuestions(category, 15);
+        console.log('ques',questions)
         quizDiv.innerHTML = "";
 
         if (questions && questions.length > 0) {
             localStorage.setItem("questions", JSON.stringify(questions));
             localStorage.setItem("category", key);
 
-            window.location.href = "quiz.html";
+            window.location.href = "Questions.html";
         } else {
             quizDiv.innerHTML = "No questions available.";
         }
@@ -85,7 +86,7 @@ function displayQuestions() {
 }
 
 
-if (window.location.pathname.includes("quiz.html")) {
+if (window.location.pathname.includes("Questions.html")) {
     displayQuestions();
 }
 
