@@ -30,36 +30,30 @@ const categories = {
 const isFetchingCategory = {};
 
 const loadQuestions = async (key) => {
-    const category = categories[key];
-    const quizDiv = document.getElementById('quiz');
-
-    if (isFetchingCategory[category]) {
-        return; 
-    }
+  const category = categories[key];
+  const quizDiv = document.getElementById("quiz");
 
   isFetchingCategory[category] = true;
   quizDiv.innerHTML = "Loading questions...";
 
- 
-
-    try {
-        const questions = await fetchQuestions(category, 10);
-        quizDiv.innerHTML = "";
+  try {
+    const questions = await fetchQuestions(category, 10);
+    quizDiv.innerHTML = "";
 
     if (questions && questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
       localStorage.setItem("category", key);
 
-            window.location.href = "quiz.html";
-        } else {
-            quizDiv.innerHTML = "No questions available.";
-        }
-    } catch (error) {
-        quizDiv.innerHTML = "Error fetching questions.";
-        console.error("Error fetching questions:", error);
-    } finally {
-        isFetchingCategory[category] = false;
+      window.location.href = "Questions.html";
+    } else {
+      quizDiv.innerHTML = "No questions available.";
     }
+  } catch (error) {
+    quizDiv.innerHTML = "Error fetching questions.";
+    console.error("Error fetching questions:", error);
+  } finally {
+    isFetchingCategory[category] = false;
+  }
 };
 
 const questionsCont = document.getElementById("questions-Cont");
@@ -114,9 +108,8 @@ function displayQuestions() {
   }
 }
 
-
-if (window.location.pathname.includes("quiz.html")) {
-    displayQuestions();
+if (window.location.pathname.includes("Questions.html")) {
+  displayQuestions();
 }
 
 
@@ -147,11 +140,6 @@ const SubmitQuestion = () => {
   finshed = true; 
   endQuiz(); 
 };
-
-
-
-
-// timer
 
 let totalTime = 1800; 
 const timer = setInterval(() => {
