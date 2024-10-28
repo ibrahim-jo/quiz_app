@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('pic.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+
+.quiz-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    height: 553px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#numofQuestions {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+}
+#questions-Cont h3{
+font-size: 18px;
+font-weight: bold;
+text-align: justify;
+}
+.header #numofQuestions {
+    margin-bottom: -5px;
+    font-family: cursive;
+    color: #007bff;
+    border-radius: 20%;
+    background-color: #e0f7fa;
+    padding: 10px;
+}
+
+#timer {
+    width: 60px;
+    height: 60px;
+    border-radius: 46%;
+    background-color: #e0f7fa;
+    font-size: 25px;
+    color: #007bff;
+    font-family: emoji;
+
+}
+
+.header #timer {
+    margin-bottom: -5px;
+}
+
+#categoryName {
+    border-radius: 12px;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 2px solid #007bff;
+}
+
+#questions-Cont {
+    text-align: left;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    background-color: #77CDFF;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+input{
+    margin-right: 10px;
+}
+
+label:hover {
+    background-color: #FFF4B5;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button.hidden {
+    display: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
