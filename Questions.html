@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz App</title>
-  <link rel="stylesheet" href="/quastion.css">
+  <link rel="stylesheet" href="./style/quastion.css">
 </head>
+
 <body>
 
   <div class="quiz-container">
     <div class="header">
       <div id="numofQuestions">1/10</div>
       <div id="timer" class="timer-circle">
-        <span>30m</span>
+        <span>15m</span><br>
+        <span>00s</span>
       </div>
     </div>
 
-    <h1 id="categoryName">Category</h1>
+    <h3 id="categoryName"></h3>
 
-    <div id="questions-Cont"></div>
+    <div id="questions-Cont">
+      <h3>بظهر نص السؤال</h3>
+
+      <div>
+        <label>
+          <input type="radio">
+          خيارات السؤال
+        </label>
+      </div>
+    </div>
     <button id="nextbtn" class="hidden" onclick="nextQuestion()">Next</button>
   </div>
 
-  <script src="./quiz.js"></script>
+  <script src="./JS/quiz.js"></script>
 </body>
+
 </html>
