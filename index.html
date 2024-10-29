@@ -9,14 +9,16 @@
 </head>
 
 <body>
+   <div class="container">
     <div class="first">
-        <div id="p-first"> Welcome To Quiz App!</div>
+        <div id="p-first">Welcome To Quiz App!</div>
         <div id="pickup">
-            Pick a question type to start
+            <div>Pick a question type to start</div>
             <div id="pic"><img src="./images/picture-main.png" alt=""></div>
         </div>
     </div>
     <div class="span"></div>
+    
     <div id="quiz">
         <button id="gen" onclick="loadQuestions('General Knowledge')"><span>General Knowledge</span></button>
         <button id="sc" onclick="loadQuestions('Science & Nature')"><span>Science & Nature</span></button>
@@ -25,6 +27,9 @@
         <button id="geo" onclick="loadQuestions('Geography')"><span>Geography</span></button>
         <button id="film" onclick="loadQuestions('Entertainment: Film')"><span>Films</span></button>
     </div>
+</div>
+
+    
     <script src="./JS/quiz.js"></script>
 </body>
 

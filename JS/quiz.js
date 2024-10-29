@@ -165,7 +165,7 @@ const backtohome = () => {
 
 if (window.location.pathname.includes("Questions.html")) {
   const timerElement = document.getElementById("timer");
-  let totalTime = 900;
+  let totalTime = 600;
   timer = setInterval(() => {
     totalTime--;
     const minutes = Math.floor(totalTime / 60);
