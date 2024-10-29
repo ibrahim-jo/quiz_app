@@ -106,7 +106,6 @@ const checkAnswer = (option, correct, questionIndex) => {
   } else if (userAnswers[questionIndex] === correct) {
     numberofcorrect--; 
   }
-  console.log(correct);
   localStorage.setItem("numcorrect", numberofcorrect); 
 };
 
@@ -146,8 +145,8 @@ const backtohome = () => {
 
 if (window.location.pathname.includes("Questions.html")) {
   const timerElement = document.getElementById("timer");
-  let totalTime = 50;
-  timer = setInterval(() => {
+  let totalTime = 900;
+    timer = setInterval(() => {
     totalTime--;
     const minutes = Math.floor(totalTime / 60);
     const seconds = totalTime % 60;
