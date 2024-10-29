@@ -21,10 +21,12 @@ body {
   text-align: center;
   font-size: 20px;
   animation: In 2s ease-in;
+  position: relative;
+  z-index: 1; 
 }
 
 .result-cont h1 {
-  color: #4CAF50;
+  color: #444cf7;
   font-size: 50px;
   margin-bottom: 10px;
 }
@@ -37,7 +39,7 @@ body {
 
 .result-cont #result {
   font-size: 40px;
-  color: #FF6F61;
+  color: #444cf7;
   font-weight: bold;
 }
 
@@ -46,7 +48,7 @@ body {
   background-color: #FFFFFF;
   border-radius: 40em;
   border-style: none;
-  box-shadow: #4CAF50 0 -1px 7px inset;
+  box-shadow: #444cf7 0 -1px 7px inset;
   color: #000000;
   cursor: pointer;
   font-size: 19px;
@@ -58,8 +60,8 @@ body {
 }
 
 .result-cont button:hover {
-  background-color: #4CAF50;
-  box-shadow: #4CAF50 0 -5px 7px inset;
+  background-color: #444cf7;
+  box-shadow: #444cf7 0 -5px 7px inset;
   transform: scale(1.125);
   color: white;
 }
