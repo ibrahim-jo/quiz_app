@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(/images/picc.jpg);
+    background-image: url(../images/picc.jpg);
     background-size: cover;
     background-position:center;
 }
@@ -83,7 +83,6 @@ text-align: justify;
 
 label {
     display: block;
-    background-color: #77CDFF;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -121,3 +120,13 @@ button.hidden {
 button:hover {
     background-color: #0056b3;
 }
+
+
+.correct-answer {
+    border: 2px solid green;
+  }
+  
+  .incorrect-answer {
+    border: 2px solid red;
+  }
+  
