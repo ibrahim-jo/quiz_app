@@ -57,7 +57,6 @@ function displayQuestions() {
   const category = localStorage.getItem("category");
   categoryName.innerHTML = `${category} Quiz`;
   numofQuestions.innerHTML = `Question ${index + 1} / 10`;
-  console.log(questions[index].correctAnswer)
 
   if (questions && index < questions.length) {
     const questionsHtml = `
@@ -67,42 +66,51 @@ function displayQuestions() {
         .map((option) => `
           <div>
             <label>
-              <input type="radio" name="question-${index}" value="${option}" 
-                onclick="checkAnswer('${option}', '${questions[index].correctAnswer}', ${index})">
+              <input type="radio" name="question-${index}" value="${option.replace(/'/g, "&apos;")}" 
+                onclick="checkAnswer('${option.replace(/'/g, "\\'")}', '${questions[index].correctAnswer.replace(/'/g, "\\'")}', ${index})">
               ${option}
-              <span id="icon-${index}-${option.replace(/ /g, '')}" style="float: right;"></span>
+              <span id="icon-${index}-${option.replace(/ /g, '').replace(/'/g, "")}" style="float: right;"></span>
             </label>
           </div>
         `).join("")}
       ${index < 9 ? `<button id="nextbtn" onclick="nextQuestion()">Next</button>` : `<button id="nextbtn" onclick="endQuiz()">Submit</button>`}
     `;
-    
+
     questionsCont.innerHTML = questionsHtml;
   } else {
     questionsCont.innerHTML = "No questions available.";
   }
 }
 
+
 const checkAnswer = (option, correct, questionIndex) => {
   userAnswers[questionIndex] = option;
-
-  const inputs = document.getElementsByName(`question-${questionIndex}`);
-  inputs.forEach((input) => {
-    input.disabled = true;
-    const parentLabel = input.parentElement;
-    const iconSpan = document.getElementById(`icon-${questionIndex}-${input.value.replace(/ /g, '')}`);
+console.log(correct);
+const inputs = document.getElementsByName(`question-${questionIndex}`);
+inputs.forEach((input) => {
+  input.disabled = true;
+  const parentLabel = input.parentElement;
+  const iconSpan = document.getElementById(`icon-${questionIndex}-${input.value.replace(/ /g, '').replace(/'/g, "")}`);
+  
+  if (iconSpan) {
     iconSpan.innerHTML = "";
+  }
 
-    if (input.value.trim() === correct) {
-      parentLabel.classList.add("correct-answer");
-      iconSpan.innerHTML = `&#10004`;
+  if (input.value.trim() === correct) {
+    parentLabel.classList.add("correct-answer");
+    if (iconSpan) {
+      iconSpan.innerHTML = `&#10004;`; 
       iconSpan.style.color = "green";
-    } else if (input.value.trim() === option) {
-      parentLabel.classList.add("incorrect-answer");
-      iconSpan.innerHTML = `&#x274c`;
+    }
+  } else if (input.value.trim() === option) {
+    parentLabel.classList.add("incorrect-answer");
+    if (iconSpan) {
+      iconSpan.innerHTML = `&#x274c;`; 
       iconSpan.style.color = "red";
     }
-  });
+  }
+});
+
 
   if (option === correct) {
     numberofcorrect++;

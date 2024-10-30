@@ -132,6 +132,10 @@ body {
   transform: scale(1.02);
 }
 
+
+
+
+
 @media (max-width: 1023px) {
   #quiz {
     grid-template-columns: repeat(2, 1fr);
